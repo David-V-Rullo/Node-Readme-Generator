@@ -1,8 +1,9 @@
+//Sets up the required modules and puts them in variables. 
 const inquirer = require("inquirer");
 const fs = require("fs");
 const path = require("path");
 const generateMarkdown = require("./utils/generateMarkdown");
-// Array of questions for user input
+// Array of questions for user input. Each answer has a corresponding markdown section in the generateMarkdown function. 
 const questions = [{
     type: "input",
     name: "github",
@@ -44,7 +45,7 @@ const questions = [{
 {
     type: "input",
     name: "usage",
-    message: "What does the usage of this repo?",
+    message: "Who is this repo for?",
 },
 {
     type: "input",
@@ -53,12 +54,12 @@ const questions = [{
 }
 
 ];
-
-// TODO: Create a function to write README file
+// Uses the file system module in Node.js to write the readme file based on the answers populated by inquirer. 
 function writeToFile(fileName, data) {
     return fs.writeFileSync(path.join(process.cwd(), fileName), data);
 }
-// TODO: Create a function to initialize app
+
+//Initilizes the app. Starts the inquirer and generates the prompts. Users answers are then passed into the writeToFile function which in turn uses the generateMarkdown function to populate the preformatted HTML. All functions ultimately lead to the complete README.md. 
 function init() {
     inquirer.prompt(questions)
         .then((inquirerAnswers) => {

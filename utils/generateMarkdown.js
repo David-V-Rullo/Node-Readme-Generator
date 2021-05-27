@@ -14,8 +14,7 @@ function renderLicenseLink(license) {
   return ``;
 }
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
+//Renders the license section. 
 function renderLicenseSection(license) {
   if (license !== "None") {
     return `## License
@@ -26,7 +25,7 @@ function renderLicenseSection(license) {
   }
 }
 
-// TODO: Create a function to generate markdown for README
+//Core of the app functionality. Contains a boilerplate format for a good README.md and populates the fields with users answers, which are contained in the data object. 
 function generateMarkdown(data) {
   return `# ${data.title};
 ${renderLicenseBadge(data.license)}
