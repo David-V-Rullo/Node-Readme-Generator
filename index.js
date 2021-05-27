@@ -1,8 +1,8 @@
-// TODO: Include packages needed for this application
-// const inquirer = require("inquirer");
+const inquirer = require("inquirer");
 const fs = require("fs");
-const path = require("path")
-// TODO: Create an array of questions for user input
+const path = require("path");
+const generateMarkdown = require("./utils/generateMarkdown");
+// Array of questions for user input
 const questions = [{
     type: "input",
     name: "github",
@@ -58,10 +58,13 @@ const questions = [{
 function writeToFile(fileName, data) {
     return fs.writeFileSync(path.join(process.cwd(), fileName), data);
 }
-const cwd = process.cwd
-console.log(`${process.cwd()}`)
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    inquirer.prompt(questions)
+        .then((inquirerAnswers) => {
+            writeToFile("./README.md", generateMarkdown({...inquirerAnswers}))
+        })
+}
 
 // Function call to initialize app
 init();
